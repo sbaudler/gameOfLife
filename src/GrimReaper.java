@@ -1,4 +1,4 @@
 public interface GrimReaper {
 
-    void handleClick(int inputX, int inputY);
+    void handleMouseClicked(int inputX, int inputY);
 }

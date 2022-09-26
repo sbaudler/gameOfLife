@@ -1,4 +1,4 @@
-public class Cells implements GrimReaper{
+public class Cells {
 
     private int height;
     private int width;
@@ -6,7 +6,7 @@ public class Cells implements GrimReaper{
     private int upperLeftY;
     private boolean alive; //when true, square is white, when flase, square is black
 
-    public Cells(int height, int width, int upperLeftX, int upperLeftY, boolean alive){
+    public Cells(int height, int width, int upperLeftX, int upperLeftY, boolean alive){ //boolean alive as last parameter
         this.height = height;
         this.width = width;
         this.upperLeftX = upperLeftX;
@@ -20,14 +20,14 @@ public class Cells implements GrimReaper{
         if (alive) {
             Main.app.fill(255); //white
         } else {
-            Main.app.fill(0); //black
+           Main.app.fill(0); //black
         }
     }
 
-    public void handleClick(int inputX, int inputY) { //from GripReaper interface
+    public void handleMouseClicked(int inputX, int inputY) { //from GripReaper interface
         if (inputX > upperLeftX && inputX < (upperLeftX + width)) {
             if (inputY > upperLeftY && inputY > (upperLeftY - height)) {
-                alive = false;
+                alive = !alive;
             }
         }
     }

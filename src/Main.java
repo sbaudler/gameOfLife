@@ -3,7 +3,8 @@ import processing.core.PApplet;
 public class Main extends PApplet{
 
     public static PApplet app;
-    private Cells cell;
+
+    public boolean alive = true;
 
     Cells [][] mitosis;
 
@@ -20,7 +21,6 @@ public class Main extends PApplet{
     public void setup(){
         int rows = 50;
         int columns = 100;
-        boolean alive = true;
         mitosis = new Cells[rows][columns];
 
         for (int row = 0; row < mitosis.length; row++){
@@ -31,7 +31,7 @@ public class Main extends PApplet{
                 int y = row * h;
 
 
-                cell = new Cells(h, w, x, y, alive);
+                Cells cell = new Cells(h, w, x, y, alive);
                 mitosis[row][column] = cell;
                 cell.spawnCells();
             }
@@ -39,12 +39,17 @@ public class Main extends PApplet{
 
     }
 
-    public void mouseClicked(){ //sigh i dont know why this wont work
-        for (Cells cell : mitosis) {
-            cell.handleClick(mouseX, mouseY);
-        }
+    public void mousePressed(){
+        System.out.println("okay");
+        for (Cells[] cellArray : mitosis) {
+            for (Cells cell : cellArray) {
+               cell.handleMouseClicked(mouseX, mouseY);
 
+            }
+        }
 }
+
+
 
 }
 
