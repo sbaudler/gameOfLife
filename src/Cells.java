@@ -25,10 +25,12 @@ public class Cells {
     }
 
     public void handleMouseClicked(int inputX, int inputY) { //from GripReaper interface
-        if (inputX > upperLeftX && inputX < (upperLeftX + width)) {
-            if (inputY > upperLeftY && inputY > (upperLeftY - height)) {
+
+
+                if (inputX > upperLeftX && inputX < (upperLeftX + width) &&
+                        inputY > upperLeftY && inputY < (upperLeftY + height)){
                 alive = !alive;
             }
         }
-    }
+
 }

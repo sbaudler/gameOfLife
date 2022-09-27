@@ -39,6 +39,16 @@ public class Main extends PApplet{
 
     }
 
+    public void draw(){
+        background(0);
+        for (int r = 0; r < mitosis.length; r++){
+            for (int c = 0; c < mitosis[r].length; c++){
+                Cells cell = mitosis[r][c];
+                cell.spawnCells();
+            }
+        }
+    }
+
     public void mousePressed(){
         System.out.println("okay");
         for (Cells[] cellArray : mitosis) {
