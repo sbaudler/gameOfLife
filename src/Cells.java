@@ -15,13 +15,14 @@ public class Cells {
     }
 
     public void spawnCells() {
-        Main.app.rect(upperLeftX, upperLeftY, width, height);
-        Main.app.stroke(0);
         if (alive) {
             Main.app.fill(255); //white
         } else {
-           Main.app.fill(0); //black
+            Main.app.fill(0); //black
         }
+        Main.app.rect(upperLeftX, upperLeftY, width, height);
+        Main.app.stroke(0);
+
     }
 
     public void handleMouseClicked(int inputX, int inputY) { //from GripReaper interface
