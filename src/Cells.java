@@ -16,8 +16,7 @@ public class Cells {
     private Rules rules;
 
 
-
-    public Cells(int size, int upperLeftX, int upperLeftY, int row, int column, CellState cellState, Rules rules){ //boolean alive as last parameter
+    public Cells(int size, int upperLeftX, int upperLeftY, int row, int column, CellState cellState, Rules rules) { //boolean alive as last parameter
         this.size = size;
         this.upperLeftX = upperLeftX;
         this.upperLeftY = upperLeftY;
@@ -30,7 +29,7 @@ public class Cells {
     public void spawnCells() {
         if (cellState == CellState.DEAD || cellState == CellState.WILL_REVIVE) {
             Main.app.fill(255); //white
-        } else if  (cellState == CellState.ALIVE || cellState == CellState.WILL_DIE){
+        } else if (cellState == CellState.ALIVE || cellState == CellState.WILL_DIE) {
             Main.app.fill(0); //black
         }
         Main.app.rect(upperLeftX, upperLeftY, size, size);
@@ -38,54 +37,65 @@ public class Cells {
 
     }
 
-    public void handleMouseClicked(int inputX, int inputY) { //from GripReaper interface
+    public void handleMouseClicked(int inputX, int inputY) {
         if (inputX > upperLeftX && inputX < (upperLeftX + size) &&
-                inputY > upperLeftY && inputY < (upperLeftY + size)){
-            if (cellState == CellState.ALIVE){
+                inputY > upperLeftY && inputY < (upperLeftY + size)) {
+            if (cellState == CellState.ALIVE) {
                 cellState = CellState.DEAD;
-                } else {
-                        cellState = CellState.ALIVE;
-                }
+            } else {
+                cellState = CellState.ALIVE;
             }
-        spawnCells();
         }
+        // spawnCells();
+    }
 
-    public void applyRules(Cells[][] cells){
+    public void applyRules(Cells[][] cells) {
         int liveNeighbors = countLiveNeighbors(cells);
         cellState = rules.applyRules(cellState, liveNeighbors);
     }
 
-    private int countLiveNeighbors(Cells[][] cells){
+    private int countLiveNeighbors(Cells[][] cells) {
         int cln = 0;
 
-        if (row < 48 && row > 0 && column < 98 && column > 0) {
 
-            if (cells[row - 1][column - 1].cellState == CellState.ALIVE || cells[row - 1][column - 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row - 1][column].cellState == CellState.ALIVE || cells[row - 1][column].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row - 1][column + 1].cellState == CellState.ALIVE || cells[row - 1][column + 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row][column - 1].cellState == CellState.ALIVE || cells[row][column - 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row][column + 1].cellState == CellState.ALIVE || cells[row][column + 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row + 1][column - 1].cellState == CellState.ALIVE || cells[row + 1][column - 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row + 1][column].cellState == CellState.ALIVE || cells[row + 1][column].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
-            if (cells[row + 1][column + 1].cellState == CellState.ALIVE || cells[row + 1][column + 1].cellState == CellState.WILL_DIE) {
-                cln++;
-            }
+        if (cells[row - 1][column - 1].cellState == CellState.ALIVE || cells[row - 1][column - 1].cellState == CellState.WILL_DIE) {
+            cln++;
         }
-        return cln;
+        if (cells[row - 1][column].cellState == CellState.ALIVE || cells[row - 1][column].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row - 1][column + 1].cellState == CellState.ALIVE || cells[row - 1][column + 1].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row][column - 1].cellState == CellState.ALIVE || cells[row][column - 1].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row][column + 1].cellState == CellState.ALIVE || cells[row][column + 1].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row + 1][column - 1].cellState == CellState.ALIVE || cells[row + 1][column - 1].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row + 1][column].cellState == CellState.ALIVE || cells[row + 1][column].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+        if (cells[row + 1][column + 1].cellState == CellState.ALIVE || cells[row + 1][column + 1].cellState == CellState.WILL_DIE) {
+            cln++;
+        }
+
+
+                return cln;
+}
+
+
+
+
+
+
+
+
+
+
 
 
         /*
@@ -95,7 +105,7 @@ public class Cells {
             return cln;
             */
 
-    }
+
 
     public void evolve(){
         if (cellState == CellState.WILL_REVIVE){

@@ -23,7 +23,7 @@ public class Main extends PApplet{
     }
 
     public void setup(){
-
+        frameRate(10);
         mitosis = new Cells[rows][columns];
         Rules rules = new MooreRules(new int[]{3}, new int[]{2, 3});
 
@@ -46,22 +46,26 @@ public class Main extends PApplet{
     }
 
     public void draw(){
+
+        if (doEvolve) {
+            applyRules();
+            evolve();
+        }
+
         background(0);
         for (int r = 0; r < mitosis.length; r++){
             for (int c = 0; c < mitosis[r].length; c++){
                 Cells cell = mitosis[r][c];
                 cell.spawnCells();
-                applyRules();
-                if (doEvolve) {
-                    evolve();
-                }
+
+
             }
         }
 
     }
 
-    public void mousePressed() {
-        System.out.println("okay");
+    public void mouseClicked() {
+        //System.out.println("okay");
         for (Cells[] cellArray : mitosis) {
             for (Cells cell : cellArray) {
                 cell.handleMouseClicked(mouseX, mouseY);
@@ -75,11 +79,13 @@ public class Main extends PApplet{
     }
 
     public void applyRules() {
-        for (Cells[] cellArray : mitosis) {
-            for (Cells cell : cellArray) {
-                cell.applyRules(mitosis);
-            }
-        }
+
+
+                for (int r = 1; r < mitosis.length - 1; r++){
+                    for (int c = 1; c < mitosis[r].length - 1; c++){
+                        mitosis[r][c].applyRules(mitosis);
+                    }
+                }
     }
 
     public void evolve(){
